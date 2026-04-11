@@ -32,9 +32,16 @@
       font-weight: normal;
     }
 
+    /* 🔥 BOUNCING LOGO */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
     .logo {
       width: 120px;
       height: auto;
+      animation: bounce 1.5s infinite;
     }
 
     .yt-container {
@@ -42,6 +49,7 @@
       justify-content: center;
       align-items: center;
       margin-top: 40px;
+      gap: 15px; /* cleaner spacing */
     }
 
     .yt-logo {
@@ -70,8 +78,14 @@
     <p>my name is Aaron Carter, i make games, animations and most importantly content!.</p>
 
     <div class="yt-container">
+      <!-- YouTube -->
       <a href="https://www.youtube.com/@aaronthecarterreal" target="_blank">
         <img src="ytlogo.png" alt="YouTube" class="yt-logo" />
+      </a>
+
+      <!-- Bluesky -->
+      <a href="https://bsky.app/profile/aaronthecarter.bsky.social" target="_blank">
+        <img src="Bluesky_Logo_White.svg.png" alt="Bluesky" class="yt-logo" />
       </a>
     </div>
   </main>
