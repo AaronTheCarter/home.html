@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aaron The Carter Official Website!</title>
+  <title>Aaron The Carter NEW.... Official Website!</title>
 
-  <!-- FAVICON -->
   <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
@@ -17,9 +16,10 @@
     body {
       margin: 0;
       font-family: 'SonicFont', Arial, sans-serif;
-      background: orange;
+      background: linear-gradient(135deg, orange, #ff6600);
       color: white;
       text-align: center;
+      overflow-x: hidden;
     }
 
     header {
@@ -28,11 +28,10 @@
 
     h1 {
       margin: 10px 0 0;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: normal;
     }
 
-    /* 🔥 BOUNCING LOGO */
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
@@ -49,11 +48,12 @@
       justify-content: center;
       align-items: center;
       margin-top: 40px;
-      gap: 15px; /* cleaner spacing */
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
     .yt-logo {
-      width: 140px;
+      width: 100px;
       cursor: pointer;
       transition: transform 0.2s ease;
     }
@@ -62,32 +62,158 @@
       transform: scale(1.1);
     }
 
-    main {
-      padding: 40px 20px;
+    .yt-logo:active {
+      transform: scale(0.95);
+    }
+
+    #musicBtn {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: rgba(0,0,0,0.3);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.2s ease;
+    }
+
+    #musicBtn:hover {
+      transform: scale(1.05);
+    }
+
+    .section {
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.25);
+      border-radius: 15px;
+      padding: 20px;
+      display: inline-block;
+      max-width: 300px;
+    }
+
+    .trail-dot {
+      width: 10px;
+      height: 10px;
+      background: white;
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
   </style>
 </head>
 
 <body>
+  
+
   <header>
     <img src="mainlogo.png" alt="Main Logo" class="logo" />
     <h1>welcome to my site</h1>
+
+    <button id="musicBtn" onclick="toggleMusic()">Music Toggle</button>
+
+    <audio id="bgMusic" loop>
+      <source src="bg.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="ringSound">
+      <source src="ring.wav" type="audio/wav">
+    </audio>
   </header>
 
   <main>
     <p>my name is Aaron Carter, i make games, animations and most importantly content!.</p>
 
     <div class="yt-container">
-      <!-- YouTube -->
-      <a href="https://www.youtube.com/@aaronthecarterreal" target="_blank">
+      <a href="https://www.youtube.com/@aaronthecarterreal" target="_blank" rel="noopener noreferrer" onclick="playRing()">
         <img src="ytlogo.png" alt="YouTube" class="yt-logo" />
       </a>
 
-      <!-- Bluesky -->
-      <a href="https://bsky.app/profile/aaronthecarter.bsky.social" target="_blank">
+      <a href="https://bsky.app/profile/aaronthecarter.bsky.social" target="_blank" rel="noopener noreferrer" onclick="playRing()">
         <img src="Bluesky_Logo_White.svg.png" alt="Bluesky" class="yt-logo" />
       </a>
     </div>
-  </main>
+
+    </main>
+
+  <script>
+    let isPlaying = false;
+
+    async function toggleMusic() {
+      const music = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicBtn");
+
+      try {
+        if (!isPlaying) {
+          await music.play();
+          btn.innerText = "Music Toggle";
+          isPlaying = true;
+        } else {
+          music.pause();
+          btn.innerText = "Music Toggle";
+          isPlaying = false;
+        }
+      } catch (err) {
+        alert("Click again to enable music!");
+      }
+    }
+
+    function playRing() {
+      const ring = document.getElementById("ringSound");
+      ring.currentTime = 0;
+      ring.play();
+    }
+
+    // Trail effect
+    const trailCount = 10;
+    const trails = [];
+    let hasMoved = false;
+
+    for (let i = 0; i < trailCount; i++) {
+      const dot = document.createElement("div");
+      dot.className = "trail-dot";
+      dot.style.display = "none";
+      document.body.appendChild(dot);
+      trails.push(dot);
+    }
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!hasMoved) {
+        trails.forEach(dot => {
+          dot.style.display = "block";
+        });
+        hasMoved = true;
+      }
+    });
+
+    function animateTrail() {
+      let x = mouseX;
+      let y = mouseY;
+
+      trails.forEach((dot) => {
+        dot.style.left = x + "px";
+        dot.style.top = y + "px";
+
+        x += (mouseX - x) * 0.3;
+        y += (mouseY - y) * 0.3;
+      });
+
+      requestAnimationFrame(animateTrail);
+    }
+
+    animateTrail();
+  </script>
 </body>
 </html>
