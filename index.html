@@ -81,36 +81,10 @@
     #musicBtn:hover {
       transform: scale(1.05);
     }
-
-    .section {
-      margin-top: 50px;
-      padding: 20px;
-    }
-
-    .card {
-      background: rgba(0,0,0,0.25);
-      border-radius: 15px;
-      padding: 20px;
-      display: inline-block;
-      max-width: 300px;
-    }
-
-    .trail-dot {
-      width: 10px;
-      height: 10px;
-      background: white;
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
   </style>
 </head>
 
 <body>
-  
 
   <header>
     <img src="mainlogo.png" alt="Main Logo" class="logo" />
@@ -140,7 +114,11 @@
       </a>
     </div>
 
-    </main>
+    <!-- NEW BUTTON -->
+    <img src="buttonye.png" alt="Game Link Button" id="gameBtn"
+      style="cursor:pointer; width:150px; margin-top:20px;" />
+
+  </main>
 
   <script>
     let isPlaying = false;
@@ -152,11 +130,9 @@
       try {
         if (!isPlaying) {
           await music.play();
-          btn.innerText = "Music Toggle";
           isPlaying = true;
         } else {
           music.pause();
-          btn.innerText = "Music Toggle";
           isPlaying = false;
         }
       } catch (err) {
@@ -170,50 +146,11 @@
       ring.play();
     }
 
-    // Trail effect
-    const trailCount = 10;
-    const trails = [];
-    let hasMoved = false;
-
-    for (let i = 0; i < trailCount; i++) {
-      const dot = document.createElement("div");
-      dot.className = "trail-dot";
-      dot.style.display = "none";
-      document.body.appendChild(dot);
-      trails.push(dot);
-    }
-
-    let mouseX = 0;
-    let mouseY = 0;
-
-    document.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      if (!hasMoved) {
-        trails.forEach(dot => {
-          dot.style.display = "block";
-        });
-        hasMoved = true;
-      }
+    document.getElementById("gameBtn").addEventListener("click", function () {
+      playRing();
+      window.location.href = "https://gamejolt.com/games/SonicTheHedgehogOrdeal/1059371";
     });
-
-    function animateTrail() {
-      let x = mouseX;
-      let y = mouseY;
-
-      trails.forEach((dot) => {
-        dot.style.left = x + "px";
-        dot.style.top = y + "px";
-
-        x += (mouseX - x) * 0.3;
-        y += (mouseY - y) * 0.3;
-      });
-
-      requestAnimationFrame(animateTrail);
-    }
-
-    animateTrail();
   </script>
+
 </body>
 </html>
