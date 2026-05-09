@@ -81,6 +81,22 @@
     #musicBtn:hover {
       transform: scale(1.05);
     }
+
+    /* Sonic Ordeal button hover effect */
+    #gameBtn {
+      cursor: pointer;
+      width: 250px;
+      margin-top: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    #gameBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #gameBtn:active {
+      transform: scale(0.95);
+    }
   </style>
 </head>
 
@@ -116,12 +132,11 @@
       <a href="mailto:aaronthecarter37@gmail.com?subject=Forum%20Sent%20from%20website%3A%20%22https%3A%2F%2Faaronthecarter.github.io%2Fhome.html%2F%22" target="_blank" rel="noopener noreferrer" onclick="playRing()">
         <img src="Gmail_Logo_White_512px.png" alt="Gmail" class="yt-logo" />
       </a>
+
+      <img src="BUY MY MERCH COMING SOON!.png" alt="Coming Soon Merch" class="yt-logo" />
     </div>
 
-    <!-- UPDATED BUTTON -->
-    <img src="buttonye.png" alt="Game Link Button" id="gameBtn"
-      style="cursor:pointer; width:250px; margin-top:20px;" />
-
+    <img src="buttonye.png" alt="Game Link Button" id="gameBtn" />
   </main>
 
   <script>
@@ -129,7 +144,6 @@
 
     async function toggleMusic() {
       const music = document.getElementById("bgMusic");
-      const btn = document.getElementById("musicBtn");
 
       try {
         if (!isPlaying) {
