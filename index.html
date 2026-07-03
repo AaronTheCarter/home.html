@@ -82,19 +82,30 @@
       transform: scale(1.05);
     }
 
-    /* Sonic Ordeal button hover effect */
-    #gameBtn {
+    /* Game & Comic buttons */
+    .button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    #gameBtn,
+    #comicBtn {
       cursor: pointer;
       width: 250px;
-      margin-top: 20px;
       transition: transform 0.2s ease;
     }
 
-    #gameBtn:hover {
+    #gameBtn:hover,
+    #comicBtn:hover {
       transform: scale(1.1);
     }
 
-    #gameBtn:active {
+    #gameBtn:active,
+    #comicBtn:active {
       transform: scale(0.95);
     }
   </style>
@@ -136,7 +147,13 @@
       <img src="BUY MY MERCH COMING SOON!.png" alt="Coming Soon Merch" class="yt-logo" />
     </div>
 
-    <img src="buttonye.png" alt="Game Link Button" id="gameBtn" />
+    <div class="button-row">
+      <img src="buttonye.png" alt="Game Link Button" id="gameBtn" />
+
+      <img src="Untitled188_20260702190649.png"
+           alt="Comic Button"
+           id="comicBtn" />
+    </div>
   </main>
 
   <script>
@@ -167,6 +184,11 @@
     document.getElementById("gameBtn").addEventListener("click", function () {
       playRing();
       window.open("https://gamejolt.com/games/SonicTheHedgehogOrdeal/1059371", "_blank");
+    });
+
+    document.getElementById("comicBtn").addEventListener("click", function () {
+      playRing();
+      window.open("Aaron%20The%20Carter%20(Issue%20%231)%20%5BWebsite%20Version%5D.pdf", "_blank");
     });
   </script>
 
