@@ -66,22 +66,6 @@
       transform: scale(0.95);
     }
 
-    #musicBtn {
-      margin-top: 20px;
-      padding: 10px 15px;
-      background: rgba(0,0,0,0.3);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: transform 0.2s ease;
-    }
-
-    #musicBtn:hover {
-      transform: scale(1.05);
-    }
-
     .button-row {
       display: flex;
       justify-content: center;
@@ -92,19 +76,22 @@
     }
 
     #gameBtn,
-    #comicBtn {
+    #comicBtn,
+    #forsakenBtn {
       cursor: pointer;
       width: 250px;
       transition: transform 0.2s ease;
     }
 
     #gameBtn:hover,
-    #comicBtn:hover {
+    #comicBtn:hover,
+    #forsakenBtn:hover {
       transform: scale(1.1);
     }
 
     #gameBtn:active,
-    #comicBtn:active {
+    #comicBtn:active,
+    #forsakenBtn:active {
       transform: scale(0.95);
     }
   </style>
@@ -116,21 +103,22 @@
     <img src="mainlogo.png" alt="Main Logo" class="logo" />
     <h1>welcome to my site</h1>
 
-    <button id="musicBtn" onclick="toggleMusic()">Music Toggle</button>
+    <button onclick="toggleMusic()">Music Toggle</button>
 
-    <!-- Background music -->
     <audio id="bgMusic" loop>
       <source src="bg.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Ring sound -->
     <audio id="ringSound">
       <source src="ring.wav" type="audio/wav">
     </audio>
 
-    <!-- Comic music -->
     <audio id="comicMusic">
       <source src="Maigo - Springless - Topic (128k).mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="forsakenSound">
+      <source src="specialscaryringsound.wav" type="audio/wav">
     </audio>
   </header>
 
@@ -138,47 +126,33 @@
     <p>my name is Aaron Carter, i make games, animations and most importantly content!.</p>
 
     <div class="yt-container">
-      <a href="https://www.youtube.com/@aaronthecarterreal" target="_blank" rel="noopener noreferrer" onclick="playRing()">
-        <img src="ytlogo.png" alt="YouTube" class="yt-logo" />
+      <a href="https://www.youtube.com/@aaronthecarterreal" target="_blank" onclick="playRing()">
+        <img src="ytlogo.png" class="yt-logo" />
       </a>
 
-      <a href="https://bsky.app/profile/aaronthecarter.bsky.social" target="_blank" rel="noopener noreferrer" onclick="playRing()">
-        <img src="Bluesky_Logo_White.svg.png" alt="Bluesky" class="yt-logo" />
+      <a href="https://bsky.app/profile/aaronthecarter.bsky.social" target="_blank" onclick="playRing()">
+        <img src="Bluesky_Logo_White.svg.png" class="yt-logo" />
       </a>
 
-      <a href="mailto:aaronthecarter37@gmail.com?subject=Forum%20Sent%20from%20website%3A%20%22https%3A%2F%2Faaronthecarter.github.io%2Fhome.html%2F%22" target="_blank" rel="noopener noreferrer" onclick="playRing()">
-        <img src="Gmail_Logo_White_512px.png" alt="Gmail" class="yt-logo" />
+      <a href="mailto:aaronthecarter37@gmail.com" target="_blank" onclick="playRing()">
+        <img src="Gmail_Logo_White_512px.png" class="yt-logo" />
       </a>
 
-      <img src="BUY MY MERCH COMING SOON!.png" alt="Coming Soon Merch" class="yt-logo" />
+      <img src="BUY MY MERCH COMING SOON!.png" class="yt-logo" />
     </div>
 
     <div class="button-row">
-      <img src="buttonye.png" alt="Game Link Button" id="gameBtn" />
-
-      <img src="Untitled188_20260702190649.png"
-           alt="Comic Button"
-           id="comicBtn" />
+      <img src="buttonye.png" id="gameBtn" />
+      <img src="Untitled188_20260702190649.png" id="comicBtn" />
+      <img src="Untitled192_20260704111824.png" id="forsakenBtn" />
     </div>
   </main>
 
   <script>
-    let isPlaying = false;
-
-    async function toggleMusic() {
+    function toggleMusic() {
       const music = document.getElementById("bgMusic");
-
-      try {
-        if (!isPlaying) {
-          await music.play();
-          isPlaying = true;
-        } else {
-          music.pause();
-          isPlaying = false;
-        }
-      } catch (err) {
-        alert("Click again to enable music!");
-      }
+      if (music.paused) music.play();
+      else music.pause();
     }
 
     function playRing() {
@@ -187,23 +161,29 @@
       ring.play();
     }
 
-    document.getElementById("gameBtn").addEventListener("click", function () {
+    function playForsakenSound() {
+      const sound = document.getElementById("forsakenSound");
+      sound.currentTime = 0;
+      sound.play();
+    }
+
+    document.getElementById("gameBtn").onclick = () => {
       playRing();
       window.open("https://gamejolt.com/games/SonicTheHedgehogOrdeal/1059371", "_blank");
-    });
+    };
 
-    document.getElementById("comicBtn").addEventListener("click", function () {
-      // Play ring
+    document.getElementById("comicBtn").onclick = () => {
       playRing();
-
-      // Play comic music
-      const comicMusic = document.getElementById("comicMusic");
-      comicMusic.currentTime = 0;
-      comicMusic.play();
-
-      // Open the comic
+      const music = document.getElementById("comicMusic");
+      music.currentTime = 0;
+      music.play();
       window.open("Aaron%20The%20Carter%20(Issue%20%231)%20%5BWebsite%20Version%5D.pdf", "_blank");
-    });
+    };
+
+    document.getElementById("forsakenBtn").onclick = () => {
+      playForsakenSound();
+      window.open("https://www.roblox.com/share?code=c6254fadabdb2545bde4d3f6e8d85929&type=ExperienceDetails&stamp=1783135263438", "_blank");
+    };
   </script>
 
 </body>
