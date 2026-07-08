@@ -94,6 +94,35 @@
     #forsakenBtn:active {
       transform: scale(0.95);
     }
+
+    /* Scrolling image strip */
+    .scroll-container {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 60px;
+      padding: 20px 0;
+    }
+
+    .scroll-track {
+      display: flex;
+      width: max-content;
+      animation: scrollImages 15s linear infinite;
+    }
+
+    .scroll-track img {
+      width: 300px;
+      margin: 0 20px;
+      flex-shrink: 0;
+    }
+
+    @keyframes scrollImages {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
   </style>
 </head>
 
@@ -145,6 +174,15 @@
       <img src="buttonye.png" id="gameBtn" />
       <img src="Untitled188_20260702190649.png" id="comicBtn" />
       <img src="Untitled192_20260704111824.png" id="forsakenBtn" />
+    </div>
+
+    <!-- Bottom scrolling image -->
+    <div class="scroll-container">
+      <div class="scroll-track">
+        <img src="Untitled220_20260707192057.png" alt="Scrolling Image">
+        <img src="Untitled220_20260707192057.png" alt="Scrolling Image">
+        <img src="Untitled220_20260707192057.png" alt="Scrolling Image">
+      </div>
     </div>
   </main>
 
